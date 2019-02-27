@@ -1,9 +1,8 @@
 import java.util.*;
 import java.io.*;
 public class Maze{
-
-    private char[][]maze;
-    private boolean animate;//false by default
+  private char[][]maze;
+  private boolean animate;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -18,9 +17,22 @@ public class Maze{
       3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then:
          throw a FileNotFoundException or IllegalStateException
     */
-    public Maze(String filename) throws FileNotFoundException{
-        //COMPLETE CONSTRUCTOR
+  public Maze(String filename) throws FileNotFoundException{
+    File text = new File("Maze1.txt");
+    int numE = 0; //Keeps track of the number of Es.
+    int numS = 0; //Keeps track of the number of Ss.
+    Scanner inf = new Scanner(text);
+    int length = inf.nextLine().length();
+    int height = 1;
+    while(inf.hasNextLine()){
+      height = height + 1;
     }
+    maze = new char[height][length];
+    while(inf.hasNextLine()){
+      String line = inf.nextLine();
+      }
+    }
+  }
 
     private void wait(int millis){
          try {
