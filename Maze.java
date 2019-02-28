@@ -35,22 +35,20 @@ public class Maze {
     }
     animate = false;
   }
-    private void wait(int millis){
-         try {
-             Thread.sleep(millis);
-         }
-         catch (InterruptedException e) {
-         }
-     }
-
-    public void setAnimate(boolean b){
-        animate = b;
+  private void wait(int millis) {
+    try {
+      Thread.sleep(millis);
     }
-
-    public void clearTerminal(){
-        //erase terminal, go to top left of screen.
-        System.out.println("\033[2J\033[1;1H");
+    catch (InterruptedException e) {
     }
+  }
+  public void setAnimate(boolean b) {
+    animate = b;
+  }
+  public void clearTerminal() {
+    //erase terminal, go to top left of screen.
+    System.out.println("\033[2J\033[1;1H");
+  }
 
 
 
