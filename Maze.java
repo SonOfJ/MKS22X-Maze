@@ -49,17 +49,16 @@ public class Maze {
     //erase terminal, go to top left of screen.
     System.out.println("\033[2J\033[1;1H");
   }
-
-
-
-
-
-   /*Return the string that represents the maze.
-     It should look like the text file with some characters replaced.
-    */
-    public String toString(){
-            return "WRITE THIS METHOD";
+  public String toString() {
+    String display = "";
+    for (int i = 0; i < maze.length; i = i + 1) {
+      for (int j = 0; j < maze[0].length; j = j + 1) {
+        display = display + maze[i][j];
+      }
+      display = display + "\n";
     }
+    return display;
+  }
 
 
     /*Wrapper Solve Function returns the helper function
