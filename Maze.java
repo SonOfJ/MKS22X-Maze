@@ -59,13 +59,8 @@ public class Maze {
     }
     return display;
   }
-
-
-    /*Wrapper Solve Function returns the helper function
-      Note the helper function has the same name, but different parameters.
-      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-    */
-    public int solve(){
+  public int solve() {
+    for ()
             //find the location of the S.
 
             //erase the S
