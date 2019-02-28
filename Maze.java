@@ -1,26 +1,10 @@
 import java.util.*;
 import java.io.*;
-public class Maze{
-  private char[][]maze;
+public class Maze {
+  private char[][] maze;
   private boolean animate;
-
-    /*Constructor loads a maze text file, and sets animate to false by default.
-
-      1. The file contains a rectangular ascii maze, made with the following 4 characters:
-      '#' - Walls - locations that cannot be moved onto
-      ' ' - Empty Space - locations that can be moved onto
-      'E' - the location of the goal (exactly 1 per file)
-      'S' - the location of the start(exactly 1 per file)
-
-      2. The maze has a border of '#' around the edges. So you don't have to check for out of bounds!
-
-      3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then:
-         throw a FileNotFoundException or IllegalStateException
-    */
-  public Maze(String filename) throws FileNotFoundException{
+  public Maze(String filename) throws FileNotFoundException {
     File text = new File("Maze1.txt");
-    int numE = 0; //Keeps track of the number of Es.
-    int numS = 0; //Keeps track of the number of Ss.
     Scanner inf = new Scanner(text);
     int length = inf.nextLine().length();
     int height = 1;
@@ -28,12 +12,29 @@ public class Maze{
       height = height + 1;
     }
     maze = new char[height][length];
-    while(inf.hasNextLine()){
+    int numE = 0; //Keeps track of the number of Es.
+    int numS = 0; //Keeps track of the number of Ss.
+    for (int i = 0; i < height; i = i + 1) { //Transfers the maze to a 2D array.
       String line = inf.nextLine();
+      for (int j = 0; j < length; j = j + 1) {
+        maze[i][j] = line.charAt(j);
       }
     }
+    for (int i = 0; i < maze.length; i = i + 1) { //Seeks for the number of Es and Ss.
+      for (int j = 0; j < maze[0].length; j = j + 1) {
+        if (maze[i][j] == 'E') {
+          numE = numE + 1;
+        }
+        if (maze[i][j] == 'S') {
+          numS = numS + 1;
+        }
+      }
+    }
+    if (numE != 1 || numS != 1) { //If there isn't exactly 1 E and 1 S.
+      throw new IllegalStateException("Invalid maze.");
+    }
+    animate = false;
   }
-
     private void wait(int millis){
          try {
              Thread.sleep(millis);
