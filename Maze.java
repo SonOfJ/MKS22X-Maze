@@ -48,4 +48,16 @@ public class Maze {
     }
     return display;
   }
+  public int solve() {
+    for (int i = 0; i < maze.length; i = i + 1) { //Finding S.
+      for (int j = 0; j < maze[0].length; j = j + 1) {
+        if (maze[i][j] == 'S') {
+          int x = j; //x-coordinate of S.
+          int y = i; //y-coordinate of S.
+        }
+      }
+    }
+    maze[y][x] = ' '; //Remove S.
+    return solve(y, x, 0); //Call helper to begin solving.
+  }
 }
