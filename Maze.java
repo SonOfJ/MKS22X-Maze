@@ -81,12 +81,13 @@ public class Maze {
     for (int i = 0; i < 4; i = i + 1) {
       if ((maze[row + vertical[i]][col + horizontal[i]] == ' ') || (maze[row + vertical[i]][col + horizontal[i]] == 'E')) { //If the path can be marked.
         maze[row][col] = '@';
-        if (solve(row + vertical[i], col + horizontal[i], level + 1) == -1) { //The maze is still unsolved.
+        int next = solve(row + vertical[i], col + horizontal[i], level + 1);
+        if (next == -1) { //The maze is still unsolved.
           if (maze[row + vertical[i]][col + horizontal[i]] != '#') { //The spot is not a wall.
             maze[row + vertical[i]][col + horizontal[i]] = '.'; //Put a period.
           }
         } else {
-          return solve(row + vertical[i], col + horizontal[i], level + 1);
+          return next;
         }
       }
     }
