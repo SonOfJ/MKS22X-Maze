@@ -24,6 +24,28 @@ public class Maze {
       row = row + 1;
     }
     animate = false;
+    if (!valid) {
+      throw new IllegalStateException(); //The maze is invalid.
+    }
+  }
+  private boolean valid() { //Checks to see if the maze is valid.
+    int numS = 0; //Number of Ss.
+    int numE = 0; //Number of Es.
+    for (int i = 0; i < maze.length; i = i + 1) {
+      for (int j = 0; j < maze[0].length; j = j + 1) {
+        if (maze[i][j] == 'S') {
+          numS = numS + 1;
+        }
+        if (maze[i][j] == 'E') {
+          numE = numE + 1;
+        }
+      }
+    }
+    if (numS != 1 || numE != 1) { //Should have 1 S and 1 E.
+      return false;
+    } else {
+      return true;
+    }
   }
   private void wait(int millis) {
     try {
