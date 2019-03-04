@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 public class Maze {
   private char[][] maze;
-  private boolean animate; //false by default
+  private boolean animate; //False by default.
   public Maze(String filename) throws FileNotFoundException {
     File text = new File(filename);
     Scanner inf = new Scanner(text);
@@ -24,7 +24,7 @@ public class Maze {
       row = row + 1;
     }
     animate = false;
-    if (!valid) {
+    if (!valid()) {
       throw new IllegalStateException(); //The maze is invalid.
     }
   }
@@ -89,15 +89,10 @@ public class Maze {
     int[] horizontal = {0,-1,0,1}; //Array containing all possible horizontal movement.
     if (animate) {
       clearTerminal();
-      char state = maze[row][col];
-      if (maze[row][col] != 'E') {
-        maze[row][col] = '\u2588';
-      }
       System.out.println(this);
-      maze[row][col] = state;
       wait(20);
     }
-    if (maze[row][col] == 'E') {
+    if (maze[row][col] == 'E') { //Done with maze.
       return level;
     }
     for (int i = 0; i < 4; i = i + 1) {
