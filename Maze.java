@@ -21,7 +21,7 @@ public class Maze {
       for (int i = 0; i < line.length(); i = i + 1) {
         maze[row][i] = line.charAt(i);
       }
-      row + row + 1;
+      row = row + 1;
     }
     animate = false;
   }
@@ -49,15 +49,48 @@ public class Maze {
     return display;
   }
   public int solve() {
+    int x = 0;
+    int y = 0;
     for (int i = 0; i < maze.length; i = i + 1) { //Finding S.
       for (int j = 0; j < maze[0].length; j = j + 1) {
         if (maze[i][j] == 'S') {
-          int x = j; //x-coordinate of S.
-          int y = i; //y-coordinate of S.
+          x = j; //x-coordinate of S.
+          y = i; //y-coordinate of S.
         }
       }
     }
     maze[y][x] = ' '; //Remove S.
     return solve(y, x, 0); //Call helper to begin solving.
+  }
+  private int solve(int row, int col, int level) {
+    int[] vertical = {1,0,-1,0}; //Array containing all possible vertical movement.
+    int[] horizontal = {0,-1,0,1}; //Array containing all possible horizontal movement.
+    if (animate) {
+      clearTerminal();
+      char state = maze[row][col];
+      if (maze[row][col] != 'E') {
+        maze[row][col] = '\u2588';
+      }
+      System.out.println(this);
+      maze[row][col] = state;
+      wait(20);
+    }
+    if (maze[row][col] == 'E') {
+      return level;
+    }
+    for (int i = 0; i < 4; i = i + 1) {
+      if ((maze[row + vertical[i]][col + horizontal[i]] == ' ') || (maze[row + vertical[i]][col + horizontal[i]] == 'E')) { //If the path can be marked.
+        maze[row][col] = '@';
+        if (solve(row + vertical[i], col + horizontal[i], level + 1) == -1) { //The maze is still unsolved.
+          if (maze[row + vertical[i]][col + horizontal[i]] != '#') { //The spot is not a wall.
+            maze[row + vertical[i]][col + horizontal[i]] = '.'; //Put a period.
+          }
+        } else {
+          return solve(row + vertical[i], col + horizontal[i], level + 1);
+        }
+      }
+    }
+    maze[row][col] = '.';
+    return -1;
   }
 }
